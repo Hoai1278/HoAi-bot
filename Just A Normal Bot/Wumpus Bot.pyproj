@@ -3,13 +3,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>9ab92859-2009-46b6-a305-c7068cf146d7</ProjectGuid>
-    <ProjectHome>.</ProjectHome>
-    <StartupFile>Just_A_Normal_Bot.py</StartupFile>
+    <ProjectHome>
+    </ProjectHome>
+    <StartupFile>Wumpus Bot.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Just A Normal Bot</Name>
+    <Name>Wumpus Bot</Name>
     <RootNamespace>Just A Normal Bot</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -21,7 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Just_A_Normal_Bot.py" />
+    <Compile Include="Wumpus Bot.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

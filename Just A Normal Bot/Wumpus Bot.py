@@ -31,6 +31,11 @@ async def on_ready():
   NoSpy = False
 
 @client.command()
+async def a(ctx):
+    if ctx.channel.type == discord.ChannelType.private:
+        await ctx.reply("Fuck off!")
+
+@client.command()
 async def send(ctx,channelID : int,txt):
   SendChannel = client.get_channel(channelID)
   await SendChannel.send(txt)
@@ -138,6 +143,26 @@ async def test(ctx):
   await ctx.send("Work!")
 
 @client.command()
+async def ask(ctx,*,question):
+    fixedYesAns = ["Is Francesc bad?"]
+    fixedNoAns = ["Is Francesc good?"]
+    if "?" in question:
+        if question in fixedYesAns:
+            await ctx.reply("Yes!")
+        elif question in fixedNoAns:
+            await ctx.reply("No!")
+        else:
+            ans = ["Yes!","No!","Not sure","Probably","Probably not"]
+            await ctx.reply(random.choice(ans))
+    else:
+        await ctx.reply("question must have \"?\"")
+
+@client.command(aliases=["bhami","Bahmhi","bahmhi"])
+async def Bhami(ctx):
+    for x in range(3):
+        await ctx.reply("Bahmhiiii")
+
+@client.command()
 async def calcu(ctx,txt):
   if ctx.guild.id == 805469981655433256:
     if ctx.channel.id in calcuChannel:
@@ -146,8 +171,11 @@ async def calcu(ctx,txt):
       elif '/0' in txt:
         await ctx.send("Error,there is divide by 0")
       else:
-        ans = eval(txt)
-        await ctx.send(ans)
+        if txt != "26+6":
+            ans = eval(txt)
+            await ctx.send(ans)
+        else:
+            await ctx.send("1, Long live the IRA!!!")
     else:
       await ctx.send("This is not the calcutor channel")
   else:
@@ -159,6 +187,60 @@ async def calcu(ctx,txt):
         ans = eval(txt)
         await ctx.send(ans)
 
+@client.command(aliases = ["b"])
+async def ban(ctx,user : discord.Member,*,reason=None):
+    if ctx.author.guild_permissions.administrator == True:
+        await user.ban(reason=reason)
+        await user.send("You have been banned from server {} for" + reason.format(ctx.guild.name))
+        await ctx.send("{} has been banned from this server for {}".format(user.mention, reason))
+    else:
+        await ctx.send("You're not the Administrator!")
+
+@client.command(aliases = ["ub"])
+async def unban(ctx,user : discord.Member):
+    if ctx.author.guild_permissions.administrator == True:
+        bannedUsers = await ctx.guild.bans()
+        memberName, memberDiscrimator = user.split("#")
+        for banEntry in bannedUser:
+            users = banEntry.user
+            if (user.name, user.discriminator) == (memberName, memberDiscrimator):
+                await ctx.guild.unbans(user)
+                await user.send("You have been unbanned from server {}.".format(ctx.guild.name))
+    else:
+        await ctx.send("You're not the Administrator!")
+
+@client.command(aliases = ["k"])
+async def kick(ctx,user : discord.Member,*,reason=None):
+    if ctx.author.guild_permissions.administrator == True:
+        await user.kick(reason=reason)
+        await user.send("You have been kicked from server {} for" + reason.format(ctx.guild.name))
+        await ctx.send("{} has been kicked from this server for {}".format(user.mention, reason))
+    else:
+        await ctx.send("You're not the Administrator!")
+
+@client.command(aliases = ["m"])
+async def mute(ctx,user : discord.Member,*,reason=None):
+    if ctx.author.guild_permissions.administrator == True:
+        mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
+        if not mutedRole:
+            mutedRole = await ctx.guild.create_role(name="Muted")
+            for channel in ctx.guild.channels:
+                await channel.set_permissions(mutedRole, speak=False, send_messages=False, read_message_history=True, read_messages=False)
+        await user.add_roles(mutedRole, reason=reason)
+        await ctx.send("{} have been muted for {}".format(user.mention, reason))
+        await user.send("You have been muted in server {}".format(ctx.guild.name))
+    else:
+        await ctx.send("You're not the Administrator!")
+
+@client.command(aliases = ["um"])
+async def unmute(ctx,user : discord.Member):
+    if ctx.author.guild_permissions.administrator == True:
+        mutedRole = discord.utils.get(ctx.guild.roles, name="Muted")
+        await user.remove_roles(mutedRole)
+        await ctx.send("{} have been unmuted".format(user.mention))
+        await user.send("You have been unmute in server {}".format(ctx.guild.name))
+    else:
+        await ctx.send("You're not the Administrator!")
 
 @client.command()
 async def stop(ctx):
@@ -172,7 +254,7 @@ async def stop(ctx):
     await asyncio.sleep(3)
     stop = False
   else:
-    await ctx.send("You are not the person who start the spam nor the adiministrator")
+    await ctx.reply("You are not the person who start the spam nor the adiministrator")
 
 @client.command()
 async def set_spam_channel(ctx,channelID : int):
@@ -182,6 +264,8 @@ async def set_spam_channel(ctx,channelID : int):
     await ctx.send("That channel is now a spam channel")
   elif channelID in spamChannel:
       await ctx.send("That channel was already a spam channel")
+  else:
+      ctx.send("You're not the Administrator")
 
 @client.command()
 async def remove_spam_channel(ctx,channelID : int):
@@ -193,10 +277,10 @@ async def remove_spam_channel(ctx,channelID : int):
 
 
 @client.command()
-async def spam(ctx,arg,times : int):
+async def spam(ctx,arg : str,times : int):
   idname.append(ctx.author.id)
   if ctx.channel.id in spamChannel:
-    if times <= 1000:
+    if times <= 5000:
       await ConsoleChannel.send("Spam Command works")
       await asyncio.sleep(0.5)
       z = 0
@@ -207,56 +291,15 @@ async def spam(ctx,arg,times : int):
            break 
         await ctx.send(arg)
         z += 1
-        if z == 10 * 1:
-          await ctx.send(arg + " Loop has reached 10 times")
-          pass
-        if z == 10 * 2:
-          await ctx.send(arg + " Loop has reached 20 times")
-          pass
-        if z == 10 * 3:
-          await ctx.send(arg + " Loop has reached 30 times")
-          pass
-        if z == 10 * 4:
-          await ctx.send(arg + " Loop has reached 40 times")
-          pass
-        if z == 10 * 5:
-          await ctx.send(arg + " Loop has reached 50 times")
-          pass
-        if z == 10 * 10:
-          await ctx.send(arg + " Loop has reached 100 times")
-          pass
-        if z == 10 * 15:
-          await ctx.send(arg + " Loop has reached 150 times")
-          pass
-        if z == 10 * 20:
-          await ctx.send(arg + " Loop has reached 200 times")
-          pass
-        if z == 10 * 25:
-          await ctx.send(arg + " Loop has reached 250 times")
-          pass
-        if z == 10 * 30:
-          await ctx.send(arg + " Loop has reached 300 times")
-          pass
-        if z == 10 * 35:
-          await ctx.send(arg + " Loop has reached 350 times")
-          pass
-        if z == 10 * 40:
-          await ctx.send(arg + " Loop has reached 400 times")
-          pass
-        if z == 10 * 45:
-          await ctx.send(arg + " Loop has reached 450 times")
-          pass
-        if z == 10 * 50:
-          await ctx.send(arg + " Loop has reached 500 times")
-          pass
-        if z == 10 * 100:
-          await ctx.send(arg + " Loop has reached 1,000 times")
+        timeList = [10,20,30,40,50,100,150,200,250,300,350,400,450,500,600,700,800,900,1000,1500,2000,2500,3000,3500,4000,45000,5000]
+        if z in timeList:
+          await ctx.send(arg + " Loop has reached {} times".format(z))
           pass
       else:
         await ConsoleChannel.send(arg+"Loop has finished")
         await ctx.send(arg+"Loop has finished")
     else:
-      await ctx.send("Spam times is too many,more than 1,000 times")
+      await ctx.send("Spam times is too many,more than 5,000 times")
   else:
      await ctx.send("This is not the spam channel")
 

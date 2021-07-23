@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Just A Normal Bot", "Just A Normal Bot\Just A Normal Bot.pyproj", "{9AB92859-2009-46B6-A305-C7068CF146D7}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Wumpus Bot", "Just A Normal Bot\Wumpus Bot.pyproj", "{9AB92859-2009-46B6-A305-C7068CF146D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
