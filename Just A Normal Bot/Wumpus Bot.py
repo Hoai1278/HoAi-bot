@@ -91,7 +91,7 @@ async def time(ctx):
 async def list(ctx):
   await ctx.send("command list: ""\n %spam is command to spam whatever you want(use %how_spam to know how to use it)" "\n %calcu to calculate whatever youwant(use %how_calcu to know how to use it)" "\n %print to make bot send whatever you want" "\n %quote to quote whatever you want" "\n %shutdown to turn off bot")
 
-@client.command()
+@client.command(aliases = ["covidthai"])
 async def covidThai(ctx):
     await ctx.send("https://covid19.workpointnews.com/" "\n ^ click here to check the covid statistic in Thailand")
 
