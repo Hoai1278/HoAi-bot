@@ -62,8 +62,12 @@ async def spy(ctx,Bool1 : bool):
 
 @client.event
 async def on_message(message):
+  global mention
+  mention = f'<@!{client.user.id}>'
   if message.author == client.user:
     return
+  if mention in message.content:
+        await message.reply("มีปัญหาหรอไอ้เหี้ย")
   if NoSpy != True:
     if message.channel.id not in spamChannel:
         if message.channel.type != discord.ChannelType.private:
@@ -279,7 +283,7 @@ async def remove_spam_channel(ctx,channelID : int):
 @client.command()
 async def spam(ctx,arg : str,times : int):
   idname.append(ctx.author.id)
-  if ctx.channel.id in spamChannel:
+  if ctx.channel.id in spamChannel and arg != mention:
     if times <= 5000:
       await ConsoleChannel.send("Spam Command works")
       await asyncio.sleep(0.5)
@@ -301,7 +305,7 @@ async def spam(ctx,arg : str,times : int):
     else:
       await ctx.send("Spam times is too many,more than 5,000 times")
   else:
-     await ctx.send("This is not the spam channel")
+     await ctx.send("This is not the spam channel or you're trying to spam @Wumpus")
 
 @client.command()
 async def infspam(ctx,*,txt):
