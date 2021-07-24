@@ -66,7 +66,7 @@ async def on_message(message):
   mention = f'<@!{client.user.id}>'
   if message.author == client.user:
     return
-  if mention in message.content and message.content.startswith(mention):
+  if mention in message.content and not message.content.startswith("%"):
         await message.reply("มีปัญหาหรอไอ้เหี้ย")
   if NoSpy != True:
     if message.channel.id not in spamChannel:
