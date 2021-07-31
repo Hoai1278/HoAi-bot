@@ -6,7 +6,6 @@ import random
 import math
 import datetime
 import time
-import youtube_dl
 
 client = commands.Bot(command_prefix = "%")
 
