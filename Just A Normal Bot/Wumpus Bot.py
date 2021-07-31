@@ -283,7 +283,7 @@ async def remove_spam_channel(ctx,channelID : int):
 @client.command()
 async def spam(ctx,arg : str,times : int):
   idname.append(ctx.author.id)
-  if ctx.channel.id in spamChannel and arg != mention:
+  if ctx.channel.id in spamChannel:
     if times <= 5000:
       await ConsoleChannel.send("Spam Command works")
       await asyncio.sleep(0.5)
@@ -305,7 +305,7 @@ async def spam(ctx,arg : str,times : int):
     else:
       await ctx.send("Spam times is too many,more than 5,000 times")
   else:
-     await ctx.send("This is not the spam channel or you're trying to spam @Wumpus")
+     await ctx.send("This is not the spam channel")
 
 @client.command()
 async def infspam(ctx,*,txt):
