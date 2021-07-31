@@ -1,0 +1,1 @@
+worker: python Wumpus_Bot.py
