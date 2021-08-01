@@ -62,7 +62,7 @@ async def spy(ctx,Bool1 : bool):
             await ctx.send("Already spying")
             
 @clienr.command()
-async def noSpy(ctx,channelID : int)
+async def noSpy(ctx,channelID : int):
   if channelID not in noSpyChannel:
     noSpyChannel.append(channelID)
     await ctx.send("That's channel is now unable to spy!")
