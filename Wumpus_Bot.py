@@ -20,6 +20,8 @@ async def on_ready():
   DMChannel = client.get_channel(857192290551201832)
   global spamChannel
   spamChannel = [810744659721977907,815114035124502528,805150557781098559,856914998660300860,857192290551201832,857191746827583498]
+  global noSpyChannel
+  noSpyChannel = []
   global calcuChannel
   calcuChannel = [856192688768286780]
   global idname
@@ -58,6 +60,14 @@ async def spy(ctx,Bool1 : bool):
             NoSpy = False
         else:
             await ctx.send("Already spying")
+            
+@clienr.command()
+async def noSpy(ctx,channelID : int)
+  if channelID not in noSpyChannel:
+    noSpyChannel.append(channelID)
+    await ctx.send("That's channel is now unable to spy!")
+  else:
+    await ctx.send("Already!")
 
 @client.event
 async def on_message(message):
@@ -67,7 +77,7 @@ async def on_message(message):
     return
   if mention in message.content and not message.content.startswith("%"):
         await message.reply("มีปัญหาหรอไอ้เหี้ย")
-  if NoSpy != True:
+  if NoSpy != True and message.channel.id not in noSpyChannel:
     if message.channel.id not in spamChannel:
         if message.channel.type != discord.ChannelType.private:
             if message.content.startswith(message.content):
