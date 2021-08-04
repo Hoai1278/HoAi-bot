@@ -78,7 +78,7 @@ async def on_message(message):
   if mention in message.content and not message.content.startswith("%"):
         await message.reply("มีปัญหาหรอไอ้เหี้ย")
   if NoSpy != True and message.channel.id not in noSpyChannel:
-    if message.channel.id not in spamChannel:
+    if message.channel.id not in spamChannel and message.author.id != 872515047841226752:
         if message.channel.type != discord.ChannelType.private:
             if message.content.startswith(message.content):
                 mesSend = str(message.author.name+str(message.author.id)+" server,channel: "+message.guild.name+str(message.guild.id) + ","+ message.channel.name +":"+str(message.channel.id) + " wrote "+  "'"+message.content+"'")
