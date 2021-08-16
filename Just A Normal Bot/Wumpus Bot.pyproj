@@ -5,7 +5,7 @@
     <ProjectGuid>9ab92859-2009-46b6-a305-c7068cf146d7</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Wumpus Bot.py</StartupFile>
+    <StartupFile>WumpusBot.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Wumpus Bot.py" />
+    <Compile Include="WumpusBot.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Procfile.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
