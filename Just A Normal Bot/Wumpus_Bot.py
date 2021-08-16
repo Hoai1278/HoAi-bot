@@ -205,7 +205,7 @@ async def unban(ctx,user : discord.Member):
     if ctx.author.guild_permissions.administrator == True:
         bannedUsers = await ctx.guild.bans()
         memberName, memberDiscrimator = user.split("#")
-        for banEntry in bannedUser:
+        for banEntry in bannedUsers:
             users = banEntry.user
             if (user.name, user.discriminator) == (memberName, memberDiscrimator):
                 await ctx.guild.unbans(user)
