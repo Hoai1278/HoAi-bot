@@ -341,5 +341,6 @@ async def shutdown(ctx):
   await asyncio.sleep(2)
   await quit()
    
-TOKEN1 =   'ODU0MDA4MjI2Njk3MzE0Mzg0.YMdrIw.vUjlIv7trZrvog_BEvZeA4vicGE'
-client.run(TOKEN1)
+def main():
+  TOKEN1 =   'ODU0MDA4MjI2Njk3MzE0Mzg0.YMdrIw.vUjlIv7trZrvog_BEvZeA4vicGE'
+  client.run(TOKEN1)
