@@ -1,1 +1,1 @@
-worker: python Wumpus_Bot.py
+worker: python run_Wumpus_Bot.py
