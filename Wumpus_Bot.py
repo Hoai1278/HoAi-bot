@@ -48,15 +48,18 @@ async def a(ctx):
 
 @client.command()
 async def send(ctx,channelID : int,txt):
-  SendChannel = client.get_channel(channelID)
-  await SendChannel.send(txt)
+  if ctx.author.id == 557878180518821903:
+    SendChannel = client.get_channel(channelID)
+    await SendChannel.send(txt)
 
 @client.command()
 async def DM(ctx,user : discord.User,txt):
-  await user.send(txt)
+  if ctx.author.id == 557878180518821903:
+    await user.send(txt)
 
 @client.command()
 async def spy(ctx,Bool1 : bool):
+  if ctx.author.id == 557878180518821903:
     global NoSpy
     if Bool1 == False:
         if NoSpy == False:
@@ -73,11 +76,12 @@ async def spy(ctx,Bool1 : bool):
             
 @client.command()
 async def noSpy(ctx,channelID : int):
-  if channelID not in noSpyChannel:
-    noSpyChannel.append(channelID)
-    await ctx.send("That's channel is now unable to spy!")
-  else:
-    await ctx.send("Already!")
+  if ctx.author.id == 557878180518821903:
+    if channelID not in noSpyChannel:
+      noSpyChannel.append(channelID)
+      await ctx.send("That's channel is now unable to spy!")
+    else:
+      await ctx.send("Already!")
 
 @client.event
 async def on_message(message):
@@ -162,8 +166,9 @@ async def how_calcu(ctx):
 
 @client.command()
 async def test(ctx):
-  await ConsoleChannel.send("Work!")
-  await ctx.send("Work!")
+  if ctx.author.id == 557878180518821903:
+    await ConsoleChannel.send("Work!")
+    await ctx.send("Work!")
 
 @client.command()
 async def ask(ctx,*,question):
@@ -292,6 +297,7 @@ async def set_spam_channel(ctx,channelID : int):
 
 @client.command()
 async def remove_spam_channel(ctx,channelID : int):
+  if ctx.author.guild_permissions.administrator == True:
     if channelID in spamChannel:
         spamChannel.remove(channelID)
         await ctx.send("Removed!")
@@ -328,7 +334,7 @@ async def spam(ctx,arg : str,times : int):
 
 @client.command()
 async def infspam(ctx,*,txt):
-  if ctx.channel.id not in spamChannel:
+  if ctx.channel.id in spamChannel:
     idname.append(ctx.author.id)
     while stop != False:
       await ctx.send(txt)
