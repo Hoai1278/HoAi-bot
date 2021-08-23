@@ -343,9 +343,10 @@ async def infspam(ctx,*,txt):
 
 @client.command()
 async def shutdown(ctx):
-  await ctx.send("Good bye")
-  await asyncio.sleep(2)
-  await quit()
+  if ctx.author.id == 557878180518821903:
+    await ctx.send("Good bye")
+    await asyncio.sleep(2)
+    await quit()
    
 def main(TOKEN):
   client.run(TOKEN)
