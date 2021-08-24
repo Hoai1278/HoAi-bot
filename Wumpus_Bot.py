@@ -330,7 +330,7 @@ async def spam(ctx,arg,times : int):
     else:
       await ctx.send("Spam times is too many,more than 5,000 times")
   else:
-     await ctx.send("This is not the spam channel")
+     await ctx.send("This is not the spam channel or you are trying to spam mention")
 
 @client.command()
 async def infspam(ctx,*,txt):
