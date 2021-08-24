@@ -306,9 +306,9 @@ async def remove_spam_channel(ctx,channelID : int):
 
 
 @client.command()
-async def spam(ctx,arg : str,times : int):
+async def spam(ctx,arg,times : int):
   idname.append(ctx.author.id)
-  if ctx.channel.id in spamChannel:
+  if ctx.channel.id in spamChannel and type(arg) != discord.Mention :
     if times <= 5000:
       await ConsoleChannel.send("Spam Command works")
       await asyncio.sleep(0.5)
