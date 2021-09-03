@@ -190,7 +190,7 @@ async def Bhami(ctx):
     for x in range(3):
         await ctx.reply("Bahmhiiii")
 
-@client.command()
+@client.command(aliases = ["eval"])
 async def calcu(ctx,txt):
   if ctx.guild.id == 805469981655433256:
     if ctx.channel.id in calcuChannel:
